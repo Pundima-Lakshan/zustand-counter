@@ -3,9 +3,24 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Counter from "./Counter";
 import { useCounterStore } from "./store";
+import { useEffect } from "react";
+
+const logCount = () => {
+  const count = useCounterStore.getState().count;
+  console.log(count);
+};
+
+const setCount = (count: number) => {
+  useCounterStore.setState({ count: count });
+};
 
 function App() {
   const count = useCounterStore((state) => state.count);
+
+  useEffect(() => {
+    setCount(10);
+    logCount();
+  }, []);
 
   return (
     <>
